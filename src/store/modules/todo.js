@@ -4,17 +4,17 @@ const CREATE = 'todo/CREATE';
 const DONE = 'todo/DONE';
 
 //액션 생성 함수
-export function create(payload) {
+export function create({id, text}) {
     return{
         type: CREATE,
-        payload,
+        payload:{id,text},
     }
 }
 
-export function done(key) {
+export function done(id) {
     return{
         type: DONE,
-        key
+        id:id
     }
 }
 
@@ -29,6 +29,16 @@ const initState = {
         {
             id:1,
             text:"물마시기",
+            done:false
+        },
+        {
+            id:2,
+            text:"코드쓰기",
+            done:true
+        },
+        {
+            id:3,
+            text:"몰라",
             done:false
         }
     ]

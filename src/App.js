@@ -1,11 +1,10 @@
 import react from 'react';
-import {Route} from 'react-router-dom';
+import ListContainer from "./components/ListContainer";
 
 function App() {
   return (
     <div className="App">
-
-
+      <ListContainer />
     </div>
   );
 }
