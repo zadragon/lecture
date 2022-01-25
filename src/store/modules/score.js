@@ -9,24 +9,38 @@
 const CHECK_CORRECT = "score/CHECK_CORRECT";
 
 //액션 생성 함수
-export function check({index, answer}){
+export function check({quizIndex, answer}) {
     return {
-        type:CHECK_CORRECT,
-        payload:{index, answer}
+        type: CHECK_CORRECT,
+        payload: {quizIndex, answer}
     };
 }
 
-const quizs = [{
-    q:"대한민국의 수도는?",
-    a:[
-        {text:"서울", correct:true},
-        {text:"인천", correct:false},
-        {text:"부산", correct:false},
-    ]
-}]
-
 const initialState = {
-    score:0,
-    page:0, // 0: 인트로 페이지, 1~ quiz.length: 퀴즈 페이지, quiz.length+1 : 마지막페이지
+    score: 0,
+    page: 0, // 0: 인트로 페이지, 1~ quiz.length: 퀴즈 페이지, quiz.length+1 : 마지막페이지
+    quizs: [
+        {
+            q: "대한민국의 수도는?",
+            a: [
+                {text: "서울", isCorrect: true},
+                {text: "인천", isCorrect: false},
+                {text: "부산", isCorrect: false},
+            ]
+        }
+    ]
 }
 
+export default function score(state = initialState, action) {
+    switch (action.type) {
+        case CHECK_CORRECT:
+            return {
+                ...state,
+                score: state.quizs[action.payload.quizIndex].isCorrect
+                    ? state.score + 10
+                    : state.score,
+            };
+        default:
+            return state;
+    }
+}
